@@ -7,16 +7,19 @@ namespace Solutions.Pages;
 public partial class SolutionDetailPage : ContentPage
 {
     private readonly ISolutionService _solutionService;
-    private Solution _solution;
+    private Solution? _solution;
 
-    public Solution Solution
+    public Solution? Solution
     {
         get => _solution;
         set
         {
             _solution = value;
             OnPropertyChanged();
-            BindingContext = _solution;
+            if (_solution != null)
+            {
+                BindingContext = _solution;
+            }
         }
     }
 
@@ -28,6 +31,8 @@ public partial class SolutionDetailPage : ContentPage
 
     private async void OnEditClicked(object sender, EventArgs e)
     {
+        if (Solution == null) return;
+        
         var navigationParameter = new Dictionary<string, object>
         {
             { "Solution", Solution }
@@ -37,6 +42,8 @@ public partial class SolutionDetailPage : ContentPage
 
     private async void OnDeleteClicked(object sender, EventArgs e)
     {
+        if (Solution == null) return;
+
         var delete = await DisplayAlert("Confirm Delete", 
             "Are you sure you want to delete this solution?", 
             "Yes", "No");

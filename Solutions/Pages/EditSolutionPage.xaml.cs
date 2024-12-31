@@ -7,7 +7,7 @@ namespace Solutions.Pages;
 public partial class EditSolutionPage : ContentPage
 {
     private readonly ISolutionService _solutionService;
-    private Solution _solution;
+    private Solution? _solution;
 
     public string TagsText
     {
@@ -24,14 +24,17 @@ public partial class EditSolutionPage : ContentPage
         }
     }
 
-    public Solution Solution
+    public Solution? Solution
     {
         get => _solution;
         set
         {
             _solution = value;
             OnPropertyChanged();
-            BindingContext = this;
+            if (_solution != null)
+            {
+                BindingContext = this;
+            }
         }
     }
 
@@ -43,6 +46,12 @@ public partial class EditSolutionPage : ContentPage
 
     private async void OnSaveClicked(object sender, EventArgs e)
     {
+        if (_solution == null)
+        {
+            await Shell.Current.GoToAsync("..");
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(_solution.Title))
         {
             await DisplayAlert("Error", "Title is required", "OK");

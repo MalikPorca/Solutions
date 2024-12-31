@@ -9,6 +9,12 @@ namespace Solutions.Services
         private SQLiteAsyncConnection? _database;
         private readonly string _databasePath;
 
+        private class TagItem
+        {
+            [Column("tag")]
+            public string Tag { get; set; } = string.Empty;
+        }
+
         public DatabaseService()
         {
             _databasePath = Path.Combine(FileSystem.AppDataDirectory, "solutions.db");
@@ -58,9 +64,9 @@ namespace Solutions.Services
         private async Task<List<string>> GetTagsForSolutionAsync(string solutionId)
         {
             await Init();
-            var tags = await _database!.QueryAsync<string>(
-                "SELECT tag FROM solution_tags WHERE solution_id = ?", solutionId);
-            return tags.ToList();
+            var tags = await _database!.QueryAsync<TagItem>(
+                "SELECT tag as Tag FROM solution_tags WHERE solution_id = ?", solutionId);
+            return tags.Select(t => t.Tag).ToList();
         }
 
         private async Task SaveTagsForSolutionAsync(string solutionId, List<string> tags)
