@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.Pages.AddSolutionPage"
+             Title="Add New Solution">
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+            <Entry x:Name="TitleEntry"
+                   Placeholder="Title"
+                   MaxLength="100"/>
+
+            <Editor x:Name="DescriptionEditor"
+                    Placeholder="Description"
+                    AutoSize="TextChanges"
+                    MaxLength="1000"
+                    HeightRequest="150"/>
+
+            <Entry x:Name="CategoryEntry"
+                   Placeholder="Category"/>
+
+            <Entry x:Name="TagsEntry"
+                   Placeholder="Tags (comma separated)"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Cancel"
+                        Clicked="OnCancelClicked"
+                        BackgroundColor="Gray"/>
+                
+                <Button Text="Save"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="{DynamicResource Primary}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

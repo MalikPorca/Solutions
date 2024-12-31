@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.Pages.SolutionDetailPage"
+             Title="Solution Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+            <Label Text="{Binding Title}"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <Frame BackgroundColor="LightGray" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="Category:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Category}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="LightGray" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="Description:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Description}"
+                           LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="LightGray" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="Tags:"
+                           FontAttributes="Bold"/>
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Tags}"
+                              Wrap="Wrap"
+                              JustifyContent="Start"
+                              AlignItems="Start">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{DynamicResource Primary}"
+                                       Padding="5"
+                                       Margin="2">
+                                    <Label Text="{Binding .}"
+                                           TextColor="White"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="LightGray" Padding="10">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                    <Label Text="Author:"
+                           FontAttributes="Bold"
+                           Grid.Column="0"
+                           Grid.Row="0"/>
+                    <Label Text="{Binding AuthorName}"
+                           Grid.Column="1"
+                           Grid.Row="0"/>
+                    
+                    <Label Text="Created:"
+                           FontAttributes="Bold"
+                           Grid.Column="0"
+                           Grid.Row="1"/>
+                    <Label Text="{Binding CreatedDate, StringFormat='{0:d}'}"
+                           Grid.Column="1"
+                           Grid.Row="1"/>
+                </Grid>
+            </Frame>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Edit"
+                        Clicked="OnEditClicked"
+                        BackgroundColor="{DynamicResource Primary}"/>
+                
+                <Button Text="Delete"
+                        Clicked="OnDeleteClicked"
+                        BackgroundColor="Red"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

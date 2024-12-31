@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+            <Frame BackgroundColor="{DynamicResource Primary}" Padding="15">
+                <Label 
+                    Text="Solutions"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="32"
+                    TextColor="White"
+                    HorizontalOptions="Center" />
+            </Frame>
+
+            <SearchBar x:Name="SearchBar" 
+                       Placeholder="Search solutions..."
+                       SearchButtonPressed="OnSearchButtonPressed"/>
+
+            <Button 
+                x:Name="AddSolutionBtn"
+                Text="Add New Solution"
+                SemanticProperties.Hint="Add a new solution to help others"
+                Clicked="OnAddSolutionClicked"
+                HorizontalOptions="Center" />
+
+            <CollectionView x:Name="SolutionsCollection">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}" 
+                                       FontSize="20" 
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}" 
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Category}" 
+                                           TextColor="{DynamicResource Primary}"/>
+                                    <Label Text="{Binding AuthorName}" 
+                                           FontSize="12"/>
+                                    <Label Text="{Binding CreatedDate, StringFormat='{0:d}'}" 
+                                           FontSize="12"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    CommandParameter="{Binding .}"
+                                    Tapped="OnSolutionTapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
