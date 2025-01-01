@@ -20,12 +20,14 @@ public static class MauiProgram
         // Register services
         builder.Services.AddSingleton<DatabaseService>();
         builder.Services.AddSingleton<ISolutionService, SolutionService>();
+        builder.Services.AddSingleton<ICategoryService, CategoryService>();
         
         // Register pages
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<AddSolutionPage>();
         builder.Services.AddTransient<SolutionDetailPage>();
         builder.Services.AddTransient<EditSolutionPage>();
+        builder.Services.AddTransient<CategoriesPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

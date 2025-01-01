@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.Pages.CategoriesPage"
+             Title="Categories">
+
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Grid.Row="0" 
+                              Spacing="10" 
+                              Padding="15"
+                              HorizontalOptions="End">
+            <Button Text="Add Category"
+                    Clicked="OnAddCategoryClicked"
+                    BackgroundColor="{DynamicResource Primary}"/>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="1"
+                       x:Name="CategoriesCollection"
+                       SelectionMode="Single"
+                       SelectionChanged="OnCategorySelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15" ColumnDefinitions="Auto,*,Auto">
+                        <Image Grid.Column="0"
+                               Source="{Binding IconName}"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               Margin="0,0,15,0"/>
+                        
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2"
+                               Text="{Binding SolutionCount}"
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=EditCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

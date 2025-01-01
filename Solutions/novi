@@ -1,0 +1,154 @@
+Naslov i opis projekta
+
+Solutions – mobilna aplikacija za dijeljenje i organizaciju rješenja svakodnevnih problema koristeći .NET MAUI i SQLite lokalnu bazu podataka
+
+Solutions je inovativna mobilna aplikacija razvijena pomoću .NET MAUI framework-a i SQLite lokalne baze podataka, osmišljena da olakša dijeljenje i pronalaženje rješenja za svakodnevne probleme. Aplikacija omogućava jednostavno i intuitivno korištenje, nudeći korisnicima sveobuhvatan sistem za organizaciju i pretraživanje korisnih rješenja. Njena glavna svrha je povezivanje korisnika s praktičnim rješenjima na jednom mjestu, organiziranim po kategorijama i označenim tagovima za lakše pronalaženje.
+
+Solutions nudi mogućnost kreiranja, uređivanja i dijeljenja rješenja uz pouzdano lokalno spremanje podataka, čime se osigurava pristup informacijama čak i bez internet konekcije. Integrirani sistem kategorija (Dom, Tehnologija, Zdravlje, Uradi sam, Ostalo) omogućava korisnicima da organiziraju rješenja u logične cjeline, dok sistem tagova dodatno olakšava pretraživanje specifičnih tema. Aplikacija dodatno pruža prostor za spremanje omiljenih rješenja i praćenje broja rješenja po kategorijama, što olakšava korisnicima pronalaženje najkorisnijih informacija. Kombinovanjem moderne tehnologije i intuitivnog dizajna, Solutions osigurava skalabilnost i prilagodljivost budućim nadogradnjama. Cilj aplikacije je pojednostaviti svakodnevni život korisnika, omogućiti brz pristup korisnim rješenjima i stvoriti platformu koja odgovara na svakodnevne izazove.
+
+Vizija i ciljevi
+
+Trenutno implementirani elementi sistema:
+- Sistem za kreiranje i uređivanje rješenja s detaljnim opisima
+- Kategorizacija rješenja u predefinisane kategorije (Dom, Tehnologija, Zdravlje, Uradi sam, Ostalo)
+- Mogućnost dodavanja, uređivanja i brisanja prilagođenih kategorija
+- Označavanje rješenja tagovima za lakše pretraživanje
+- Pretraživanje rješenja po nazivu, opisu ili kategoriji
+- Lokalno spremanje podataka pomoću SQLite baze
+- Praćenje broja rješenja po kategorijama
+- Intuitivno korisničko sučelje s modernim dizajnom
+
+Ciljevi projekta:
+
+1. Obezbijediti jednostavan pristup rješenjima za svakodnevne probleme - kreiranje platforme koja omogućava jednostavno korištenje bez obzira na tehničke vještine korisnika, uz prilagođavanje različitim potrebama kroz kategorije i tagove. Mjerljivi pokazatelj uspjeha ovog cilja ogleda se u povećanju broja spremljenih rješenja za najmanje 30% mjesečno. Rok za postizanje ovog cilja je 6 mjeseci od pokretanja sistema.
+
+2. Optimizacija vremena potrebnog za pronalaženje rješenja - kroz implementaciju naprednog sistema pretraživanja i kategorizacije, vrijeme potrebno za pronalaženje relevantnih rješenja planirano je smanjiti za 50%. Dodatno, uvođenjem sistema tagova i kategorija, organizacija sadržaja će se značajno poboljšati. Ovaj cilj treba biti ostvaren u periodu od tri mjeseca nakon početka implementacije.
+
+3. Promocija dijeljenja znanja i iskustava - cilj je postići visok nivo angažmana korisnika, pri čemu će najmanje 60% aktivnih korisnika doprinijeti barem jednim rješenjem mjesečno. Ovaj cilj mjeri se kroz broj novih rješenja i rok za postizanje je 12 mjeseci.
+
+4. Osiguranje kvalitete i relevantnosti sadržaja - implementacija sistema za ocjenjivanje i filtriranje sadržaja bit će dostupna unutar 6 mjeseci od pokretanja aplikacije. Ovaj cilj uključuje i zaštitu privatnosti korisničkih podataka.
+
+Analiza tržišta i ciljne grupe
+
+Tržište aplikacija za dijeljenje znanja i rješenja pokazuje rastući trend ka personaliziranim i specijaliziranim platformama koje se fokusiraju na specifične niše i potrebe korisnika.
+
+Ciljne grupe:
+- Pojedinci svih dobnih skupina koji traže praktična rješenja za svakodnevne probleme
+- Profesionalci koji žele dijeliti svoje znanje i iskustvo
+- Studenti i učenici koji traže pomoć u učenju i organizaciji
+- DIY entuzijasti koji traže ili dijele kreativna rješenja
+- Tehnološki entuzijasti koji žele pristup brzim rješenjima tehničkih problema
+
+Karakteristike korisnika:
+- Dobne skupine: Sve dobne skupine, s posebnim fokusom na 18-45 godina
+- Socioekonomske karakteristike: Srednja i viša klasa, različita zanimanja, osnovna do napredna informatička pismenost
+- Specifične potrebe: Brz pristup praktičnim rješenjima, mogućnost dijeljenja znanja, organizacija informacija
+
+SWOT Analiza
+
+Snage:
+- Intuitivno korisničko sučelje
+- Offline dostupnost podataka
+- Fleksibilan sistem kategorizacije
+- Brzo pretraživanje i filtriranje
+- Lokalno spremanje podataka za privatnost
+
+Slabosti:
+- Ograničena funkcionalnost bez internet konekcije
+- Početna baza rješenja je mala
+- Nedostatak naprednih funkcija za kolaboraciju
+- Ograničena platforma (trenutno samo Android)
+
+Prilike:
+- Rastući trend dijeljenja znanja online
+- Potreba za organiziranim rješenjima svakodnevnih problema
+- Mogućnost proširenja na iOS platformu
+- Dodavanje društvenih funkcija
+- Integracija s drugim servisima
+
+Prijetnje:
+- Konkurencija od strane velikih platformi
+- Promjene u tehnološkim standardima
+- Sigurnosni izazovi
+- Održavanje kvalitete sadržaja
+
+Funkcionalni zahtjevi
+
+ID | Zahtjev | Opis | Prioritet
+FR 1.0 | Upravljanje rješenjima | Sistem omogućava CRUD operacije nad rješenjima | Visok
+FR 1.1 | Kreiranje rješenja | Korisnik može dodati novo rješenje s nazivom, opisom, kategorijom i tagovima | Visok
+FR 1.2 | Pretraživanje | Pretraživanje rješenja po nazivu, opisu, kategoriji ili tagovima | Visok
+FR 1.3 | Kategorije | Upravljanje kategorijama (pregled, dodavanje, uređivanje, brisanje) | Visok
+FR 1.4 | Tagovi | Dodavanje i uklanjanje tagova za rješenja | Srednji
+FR 1.5 | Offline rad | Pristup svim funkcijama bez internet konekcije | Visok
+FR 1.6 | Backup podataka | Izvoz i uvoz lokalnih podataka | Srednji
+FR 1.7 | Filtriranje | Filtriranje rješenja po različitim kriterijima | Srednji
+FR 1.8 | Statistika | Praćenje broja rješenja po kategorijama | Nizak
+
+Nefunkcionalni zahtjevi
+
+ID | Zahtjev | Opis | Prioritet
+NFR 1.0 | Performanse | Vrijeme odziva aplikacije mora biti ispod 2 sekunde za sve operacije | Visok
+NFR 1.1 | Skalabilnost | Aplikacija mora podržavati minimalno 1000 rješenja bez degradacije performansi | Visok
+NFR 1.2 | Dostupnost | Aplikacija mora biti dostupna offline sa svim funkcionalnostima | Visok
+NFR 1.3 | Sigurnost | Lokalni podaci moraju biti enkriptirani i sigurno pohranjeni | Visok
+NFR 1.4 | Pouzdanost | Aplikacija mora imati mehanizam za backup i restore podataka | Srednji
+NFR 1.5 | Održivost | Kod mora biti modulariziran i dokumentiran za lakše održavanje | Srednji
+NFR 1.6 | Kompatibilnost | Aplikacija mora raditi na Android 8.0 i novijim verzijama | Visok
+NFR 1.7 | Korisničko iskustvo | Intuitivno sučelje sa maksimalno 3 koraka do željene funkcije | Visok
+NFR 1.8 | Lokalizacija | Podrška za bosanski/hrvatski/srpski jezik | Srednji
+
+Tehnički zahtjevi
+
+Korištene tehnologije:
+
+.NET MAUI (Multi-platform App UI)
+- Razvoj cross-platform mobilne aplikacije
+- Implementacija modernog korisničkog sučelja
+- Optimizacija performansi na Android platformi
+
+SQLite baza podataka
+- Lokalno spremanje podataka
+- Efikasno pretraživanje i filtriranje
+- Održavanje relacija između entiteta
+
+Visual Studio 2022
+- Primarno razvojno okruženje
+- Debugging i testiranje
+- Deployment na Android uređaje
+
+Razvojni alati:
+- C# programski jezik za backend logiku
+- XAML za definiranje korisničkog sučelja
+- Git za verzioniranje koda
+- Android SDK za specifične funkcionalnosti platforme
+
+Poslovni i društveni efekti
+
+Poslovni efekti:
+- Optimizacija procesa dijeljenja znanja kroz strukturiranu platformu
+- Smanjenje vremena potrebnog za pronalaženje rješenja kroz napredni sistem pretraživanja
+- Povećanje produktivnosti korisnika kroz brži pristup relevantnim informacijama
+- Poboljšanje organizacije znanja kroz kategorizaciju i označavanje
+- Smanjenje dupliciranja rješenja kroz centralizirani sistem
+
+Društveni efekti:
+- Olakšavanje pristupa praktičnim rješenjima za svakodnevne probleme
+- Poticanje dijeljenja znanja i iskustava unutar zajednice
+- Promocija digitalne pismenosti i korištenja modernih tehnologija
+- Stvaranje baze znanja dostupne svima
+- Podrška cjeloživotnom učenju i razvoju vještina
+
+Zaključak
+
+Projekat "Solutions" predstavlja inovativno rješenje za organizaciju i dijeljenje znanja o svakodnevnim problemima i njihovim rješenjima. Kroz intuitivno korisničko sučelje i napredne mogućnosti pretraživanja, aplikacija omogućava korisnicima brz pristup relevantnim informacijama i efikasno dijeljenje vlastitih iskustava.
+
+Integracija modernih tehnologija poput .NET MAUI framework-a i SQLite baze podataka osigurava pouzdanost i skalabilnost sistema, dok fokus na offline dostupnost podataka čini aplikaciju praktičnom za svakodnevnu upotrebu. Strukturirani pristup organizaciji sadržaja kroz kategorije i tagove, uz mogućnost personalizacije, stvara platformu koja se može prilagoditi različitim potrebama korisnika.
+
+Očekivani rezultati projekta temelje se na jasnoj viziji praktične primjene i razumijevanju potreba korisnika. Solutions nije samo tehnološko rješenje, već i društveno koristan alat koji doprinosi stvaranju kulture dijeljenja znanja i međusobne pomoći. Kontinuirani razvoj i planirana proširenja funkcionalnosti osigurat će dugoročnu vrijednost i relevantnost aplikacije za sve veći broj korisnika.
+
+Literatura
+
+[1] Microsoft, ".NET MAUI Documentation," Microsoft Docs. Dostupno na: https://docs.microsoft.com/dotnet/maui/
+[2] SQLite, "SQLite Documentation," SQLite.org. Dostupno na: https://sqlite.org/docs.html
+[3] "Mobile App Development Trends 2024," TechCrunch. [Posljednji pristup: 31. decembar 2023.].

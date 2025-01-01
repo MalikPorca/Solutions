@@ -3,14 +3,26 @@ using Solutions.Services;
 
 namespace Solutions.Pages;
 
+[QueryProperty(nameof(ReturnRoute), "returnRoute")]
 public partial class AddSolutionPage : ContentPage
 {
     private readonly ISolutionService _solutionService;
+    public string ReturnRoute { get; set; } = "..";
 
     public AddSolutionPage(ISolutionService solutionService)
     {
         InitializeComponent();
         _solutionService = solutionService;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        // Clear any previous entries
+        TitleEntry.Text = string.Empty;
+        DescriptionEditor.Text = string.Empty;
+        CategoryEntry.Text = string.Empty;
+        TagsEntry.Text = string.Empty;
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)
@@ -41,7 +53,7 @@ public partial class AddSolutionPage : ContentPage
         
         if (success)
         {
-            await Shell.Current.GoToAsync("..");
+            await Navigation.PopAsync();
         }
         else
         {
@@ -51,6 +63,6 @@ public partial class AddSolutionPage : ContentPage
 
     private async void OnCancelClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("..");
+        await Navigation.PopAsync();
     }
 }

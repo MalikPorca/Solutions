@@ -10,6 +10,7 @@ namespace Solutions.Services
         Task<bool> UpdateSolutionAsync(Solution solution);
         Task<bool> DeleteSolutionAsync(string id);
         Task<List<Solution>> SearchSolutionsAsync(string searchTerm);
+        Task<List<Solution>> FilterSolutionsAsync(string? category = null, List<string>? tags = null, DateTime? fromDate = null, DateTime? toDate = null);
     }
 
     public class SolutionService : ISolutionService
@@ -82,6 +83,36 @@ namespace Solutions.Services
                 return await GetSolutionsAsync();
 
             return await _databaseService.SearchSolutionsAsync(searchTerm);
+        }
+
+        public async Task<List<Solution>> FilterSolutionsAsync(string? category = null, List<string>? tags = null, DateTime? fromDate = null, DateTime? toDate = null)
+        {
+            var solutions = await GetSolutionsAsync();
+
+            // Apply category filter
+            if (!string.IsNullOrEmpty(category))
+            {
+                solutions = solutions.Where(s => s.Category == category).ToList();
+            }
+
+            // Apply tags filter
+            if (tags != null && tags.Any())
+            {
+                solutions = solutions.Where(s => s.Tags.Any(t => tags.Contains(t))).ToList();
+            }
+
+            // Apply date range filter
+            if (fromDate.HasValue)
+            {
+                solutions = solutions.Where(s => s.CreatedDate >= fromDate.Value).ToList();
+            }
+
+            if (toDate.HasValue)
+            {
+                solutions = solutions.Where(s => s.CreatedDate <= toDate.Value).ToList();
+            }
+
+            return solutions;
         }
     }
 }

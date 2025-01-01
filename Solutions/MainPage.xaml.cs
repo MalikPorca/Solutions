@@ -1,16 +1,25 @@
 using Solutions.Models;
 using Solutions.Services;
+using Solutions.Pages;
 
 namespace Solutions;
 
 public partial class MainPage : ContentPage
 {
     private readonly ISolutionService _solutionService;
+    private readonly IServiceProvider _serviceProvider;
 
-    public MainPage(ISolutionService solutionService)
+    public MainPage(ISolutionService solutionService, IServiceProvider serviceProvider)
     {
         InitializeComponent();
         _solutionService = solutionService;
+        _serviceProvider = serviceProvider;
+        LoadSolutions();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
         LoadSolutions();
     }
 
@@ -35,8 +44,8 @@ public partial class MainPage : ContentPage
 
     private async void OnAddSolutionClicked(object sender, EventArgs e)
     {
-        // This will be implemented when we create the AddSolutionPage
-        await Shell.Current.GoToAsync("AddSolutionPage");
+        var addPage = _serviceProvider.GetService<AddSolutionPage>();
+        await Navigation.PushAsync(addPage);
     }
 
     private async void OnSolutionTapped(object sender, TappedEventArgs e)
@@ -47,7 +56,6 @@ public partial class MainPage : ContentPage
             {
                 { "Solution", solution }
             };
-            // This will be implemented when we create the SolutionDetailPage
             await Shell.Current.GoToAsync("SolutionDetailPage", navigationParameter);
         }
     }
