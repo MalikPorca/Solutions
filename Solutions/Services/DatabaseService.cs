@@ -30,6 +30,7 @@ namespace Solutions.Services
             // Create tables
             await _database.CreateTableAsync<Solution>();
             await _database.CreateTableAsync<Category>();
+            await _database.CreateTableAsync<User>();
             
             await _database.ExecuteAsync(
                 @"CREATE TABLE IF NOT EXISTS solution_tags (
@@ -260,6 +261,51 @@ namespace Solutions.Services
                 count, categoryId);
 
             return count;
+        }
+
+        #endregion
+
+        #region Users
+
+        public async Task<int> SaveUserAsync(User user)
+        {
+            await Init();
+            if (_database == null)
+                throw new InvalidOperationException("Database not initialized");
+
+            if (string.IsNullOrEmpty(user.Id))
+                user.Id = Guid.NewGuid().ToString();
+
+            return await _database.InsertOrReplaceAsync(user);
+        }
+
+        public async Task<User> GetUserAsync(string id)
+        {
+            await Init();
+            if (_database == null)
+                throw new InvalidOperationException("Database not initialized");
+
+            return await _database.Table<User>()
+                .FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            await Init();
+            if (_database == null)
+                throw new InvalidOperationException("Database not initialized");
+
+            return await _database.Table<User>()
+                .FirstOrDefaultAsync(u => u.Email == email.ToLower());
+        }
+
+        public async Task<int> DeleteUserAsync(User user)
+        {
+            await Init();
+            if (_database == null)
+                throw new InvalidOperationException("Database not initialized");
+
+            return await _database.DeleteAsync(user);
         }
 
         #endregion

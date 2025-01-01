@@ -11,6 +11,7 @@ namespace Solutions.Services
         Task<bool> DeleteSolutionAsync(string id);
         Task<List<Solution>> SearchSolutionsAsync(string searchTerm);
         Task<List<Solution>> FilterSolutionsAsync(string? category = null, List<string>? tags = null, DateTime? fromDate = null, DateTime? toDate = null);
+        Task<List<Solution>> GetSolutionsByCategoryAsync(string category);
     }
 
     public class SolutionService : ISolutionService
@@ -113,6 +114,12 @@ namespace Solutions.Services
             }
 
             return solutions;
+        }
+
+        public async Task<List<Solution>> GetSolutionsByCategoryAsync(string category)
+        {
+            var solutions = await GetSolutionsAsync();
+            return solutions.Where(s => s.Category?.Equals(category, StringComparison.OrdinalIgnoreCase) ?? false).ToList();
         }
     }
 }

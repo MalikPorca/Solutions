@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.Pages.ProfilePage"
+             Title="Profile">
+    
+    <ScrollView>
+        <Grid RowDefinitions="Auto,*" Padding="20">
+            <!-- Profile Header -->
+            <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="0,0,0,30">
+                <Image x:Name="ProfileImage"
+                       Source="default_profile"
+                       HeightRequest="120"
+                       WidthRequest="120"
+                       HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileImageTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label x:Name="NameLabel"
+                       Text="John Doe"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <Label x:Name="EmailLabel"
+                       Text="john@example.com"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"/>
+
+                <Label x:Name="JoinDateLabel"
+                       Text="Member since: Jan 1, 2025"
+                       TextColor="Gray"
+                       FontSize="Small"
+                       HorizontalOptions="Center"/>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+                    <Button Text="Edit Profile"
+                            Clicked="OnEditProfileClicked"
+                            Grid.Column="0"/>
+                    <Button Text="Change Password"
+                            Clicked="OnChangePasswordClicked"
+                            Grid.Column="1"/>
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Statistics -->
+            <VerticalStackLayout Grid.Row="1" Spacing="20">
+                <Label Text="Your Statistics"
+                       FontSize="20"
+                       FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="20" ColumnSpacing="20">
+                    <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+                        <VerticalStackLayout>
+                            <Label x:Name="SolutionsCountLabel"
+                                   Text="0"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Solutions"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="1" Grid.Row="0" Padding="15">
+                        <VerticalStackLayout>
+                            <Label x:Name="CategoriesCountLabel"
+                                   Text="0"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Categories"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="0" Grid.Row="1" Padding="15">
+                        <VerticalStackLayout>
+                            <Label x:Name="TagsCountLabel"
+                                   Text="0"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Tags Used"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="1" Grid.Row="1" Padding="15">
+                        <VerticalStackLayout>
+                            <Label x:Name="LastActivityLabel"
+                                   Text="Today"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Last Active"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <Button Text="Logout"
+                        Clicked="OnLogoutClicked"
+                        BackgroundColor="Red"
+                        Margin="0,20,0,0"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

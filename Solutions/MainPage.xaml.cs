@@ -4,10 +4,44 @@ using Solutions.Pages;
 
 namespace Solutions;
 
+[QueryProperty(nameof(FilteredSolutions), "FilteredSolutions")]
+[QueryProperty(nameof(CategoryName), "CategoryName")]
 public partial class MainPage : ContentPage
 {
     private readonly ISolutionService _solutionService;
     private readonly IServiceProvider _serviceProvider;
+    private List<Solution> _filteredSolutions;
+    private string _categoryName;
+
+    public List<Solution> FilteredSolutions
+    {
+        get => _filteredSolutions;
+        set
+        {
+            _filteredSolutions = value;
+            if (value != null)
+            {
+                SolutionsCollection.ItemsSource = value;
+            }
+        }
+    }
+
+    public string CategoryName
+    {
+        get => _categoryName;
+        set
+        {
+            _categoryName = value;
+            if (!string.IsNullOrEmpty(value))
+            {
+                Title = $"{value} Solutions";
+            }
+            else
+            {
+                Title = "All Solutions";
+            }
+        }
+    }
 
     public MainPage(ISolutionService solutionService, IServiceProvider serviceProvider)
     {
@@ -20,7 +54,10 @@ public partial class MainPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        LoadSolutions();
+        if (FilteredSolutions == null)
+        {
+            LoadSolutions();
+        }
     }
 
     private async void LoadSolutions()
@@ -34,11 +71,23 @@ public partial class MainPage : ContentPage
         var searchTerm = SearchBar.Text;
         if (string.IsNullOrWhiteSpace(searchTerm))
         {
-            LoadSolutions();
+            if (FilteredSolutions != null)
+            {
+                SolutionsCollection.ItemsSource = FilteredSolutions;
+            }
+            else
+            {
+                LoadSolutions();
+            }
             return;
         }
 
         var results = await _solutionService.SearchSolutionsAsync(searchTerm);
+        if (FilteredSolutions != null)
+        {
+            // Filter search results by category if we're in category view
+            results = results.Where(s => s.Category == CategoryName).ToList();
+        }
         SolutionsCollection.ItemsSource = results;
     }
 

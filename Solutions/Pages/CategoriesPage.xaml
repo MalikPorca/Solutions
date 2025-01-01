@@ -3,31 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Solutions.Pages.CategoriesPage"
              Title="Categories">
-
-    <Grid RowDefinitions="Auto,*">
-        <HorizontalStackLayout Grid.Row="0" 
-                              Spacing="10" 
-                              Padding="15"
-                              HorizontalOptions="End">
-            <Button Text="Add Category"
+    
+    <Grid RowDefinitions="Auto,Auto,*">
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="*,*" 
+              Margin="10">
+            <Button Text="Add Category" 
                     Clicked="OnAddCategoryClicked"
-                    BackgroundColor="{DynamicResource Primary}"/>
-        </HorizontalStackLayout>
+                    Grid.Column="0"
+                    Margin="0,0,5,0"/>
+            <Button Text="View All Solutions"
+                    Clicked="OnViewAllSolutionsClicked"
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </Grid>
 
-        <CollectionView Grid.Row="1"
-                       x:Name="CategoriesCollection"
+        <Label Text="Total Solutions: "
+               x:Name="TotalSolutionsLabel"
+               Grid.Row="1"
+               Margin="15,0,15,10"
+               FontSize="16"/>
+
+        <CollectionView x:Name="CategoriesCollection"
+                       Grid.Row="2"
                        SelectionMode="Single"
                        SelectionChanged="OnCategorySelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="15" ColumnDefinitions="Auto,*,Auto">
-                        <Image Grid.Column="0"
-                               Source="{Binding IconName}"
+                    <Grid Padding="10" ColumnDefinitions="Auto,*,Auto,Auto">
+                        <Image Source="{Binding IconName}"
                                HeightRequest="40"
                                WidthRequest="40"
-                               Margin="0,0,15,0"/>
+                               Grid.Column="0"/>
                         
-                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                        <VerticalStackLayout Grid.Column="1" 
+                                           Margin="10,0">
                             <Label Text="{Binding Name}"
                                    FontSize="18"
                                    FontAttributes="Bold"/>
@@ -36,17 +47,15 @@
                                    TextColor="Gray"/>
                         </VerticalStackLayout>
 
-                        <Label Grid.Column="2"
-                               Text="{Binding SolutionCount}"
-                               FontSize="16"
+                        <Label Text="{Binding SolutionCount, StringFormat='{0} solutions'}"
                                VerticalOptions="Center"
-                               HorizontalOptions="End"/>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer 
+                               Grid.Column="2"
+                               Margin="10,0"/>
+                        
+                        <Button Text="Edit"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=EditCommand}"
-                                CommandParameter="{Binding .}"/>
-                        </Grid.GestureRecognizers>
+                                CommandParameter="{Binding .}"
+                                Grid.Column="3"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

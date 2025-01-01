@@ -1,18 +1,21 @@
 using Solutions.Models;
 using Solutions.Services;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace Solutions.Pages;
 
 public partial class CategoriesPage : ContentPage
 {
     private readonly ICategoryService _categoryService;
+    private readonly ISolutionService _solutionService;
     public ICommand EditCommand { get; }
 
-    public CategoriesPage(ICategoryService categoryService)
+    public CategoriesPage(ICategoryService categoryService, ISolutionService solutionService)
     {
         InitializeComponent();
         _categoryService = categoryService;
+        _solutionService = solutionService;
         EditCommand = new Command<Category>(OnEditCategory);
     }
 
@@ -27,6 +30,17 @@ public partial class CategoriesPage : ContentPage
         try
         {
             var categories = await _categoryService.GetCategoriesAsync();
+            var allSolutions = await _solutionService.GetSolutionsAsync();
+            
+            // Update total solutions count
+            TotalSolutionsLabel.Text = $"Total Solutions: {allSolutions.Count}";
+
+            foreach (var category in categories)
+            {
+                // Get solution count for each category
+                var solutions = await _solutionService.GetSolutionsByCategoryAsync(category.Name);
+                category.SolutionCount = solutions.Count;
+            }
             CategoriesCollection.ItemsSource = categories;
         }
         catch (Exception ex)
@@ -61,6 +75,18 @@ public partial class CategoriesPage : ContentPage
         {
             await DisplayAlert("Error", "Failed to create category", "OK");
         }
+    }
+
+    private async void OnViewAllSolutionsClicked(object sender, EventArgs e)
+    {
+        var solutions = await _solutionService.GetSolutionsAsync();
+        var navigationParameter = new Dictionary<string, object>
+        {
+            { "FilteredSolutions", solutions },
+            { "CategoryName", string.Empty }  // Empty string means "All Solutions"
+        };
+        
+        await Shell.Current.GoToAsync("//MainPage", navigationParameter);
     }
 
     private async void OnEditCategory(Category category)
@@ -99,26 +125,23 @@ public partial class CategoriesPage : ContentPage
         {
             CategoriesCollection.SelectedItem = null;
 
-            var action = await DisplayActionSheet(
-                selectedCategory.Name,
-                "Cancel",
-                selectedCategory.Name == "Other" ? null : "Delete",
-                "Edit", "View Solutions");
-
-            switch (action)
+            // Get solutions for the selected category
+            var solutions = await _solutionService.GetSolutionsByCategoryAsync(selectedCategory.Name);
+            
+            // Navigate to MainPage with filtered solutions
+            var navigationParameter = new Dictionary<string, object>
             {
-                case "Edit":
-                    OnEditCategory(selectedCategory);
-                    break;
-                case "Delete":
-                    await DeleteCategory(selectedCategory);
-                    break;
-                case "View Solutions":
-                    // We'll implement this later
-                    await DisplayAlert("Coming Soon", "This feature will be available soon!", "OK");
-                    break;
-            }
+                { "FilteredSolutions", solutions },
+                { "CategoryName", selectedCategory.Name }
+            };
+            
+            await Shell.Current.GoToAsync("//MainPage", navigationParameter);
         }
+    }
+
+    private async void OnDeleteCategoryClicked(object sender, EventArgs e)
+    {
+        // This method is not implemented in the provided code edit
     }
 
     private async Task DeleteCategory(Category category)

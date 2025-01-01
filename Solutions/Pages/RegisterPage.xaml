@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solutions.Pages.RegisterPage"
+             Title="Register">
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" 
+                            Padding="30,0" 
+                            VerticalOptions="Center">
+
+            <Label 
+                Text="Create Account"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Username"
+                       FontSize="Medium"/>
+                <Entry x:Name="UsernameEntry"
+                       Placeholder="Choose a username"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Email"
+                       FontSize="Medium"/>
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Enter your email"
+                       Keyboard="Email"/>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                    <Label Text="First Name"
+                           FontSize="Medium"/>
+                    <Entry x:Name="FirstNameEntry"
+                           Placeholder="First name"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                    <Label Text="Last Name"
+                           FontSize="Medium"/>
+                    <Entry x:Name="LastNameEntry"
+                           Placeholder="Last name"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Password"
+                       FontSize="Medium"/>
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Choose a password"
+                       IsPassword="True"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Confirm Password"
+                       FontSize="Medium"/>
+                <Entry x:Name="ConfirmPasswordEntry"
+                       Placeholder="Confirm your password"
+                       IsPassword="True"/>
+            </VerticalStackLayout>
+
+            <Button 
+                x:Name="RegisterButton"
+                Text="Register"
+                SemanticProperties.Hint="Creates a new account"
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Center" />
+
+            <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                <Label Text="Already have an account?"/>
+                <Label Text="Login"
+                       TextColor="{StaticResource Primary}"
+                       TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

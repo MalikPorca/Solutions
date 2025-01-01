@@ -21,9 +21,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<DatabaseService>();
         builder.Services.AddSingleton<ISolutionService, SolutionService>();
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
+        builder.Services.AddSingleton<IAuthService, AuthService>();
         
         // Register pages
         builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<RegisterPage>();
+        builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddTransient<AddSolutionPage>();
         builder.Services.AddTransient<SolutionDetailPage>();
         builder.Services.AddTransient<EditSolutionPage>();

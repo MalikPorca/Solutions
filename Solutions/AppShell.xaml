@@ -7,7 +7,12 @@
     xmlns:pages="clr-namespace:Solutions.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <TabBar>
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="LoginPage"/>
+
+    <TabBar Route="LoggedIn">
         <Tab Title="Home" Icon="home">
             <ShellContent
                 Title="Home"
@@ -18,6 +23,11 @@
         <Tab Title="Categories" Icon="folder">
             <ShellContent
                 ContentTemplate="{DataTemplate pages:CategoriesPage}" />
+        </Tab>
+
+        <Tab Title="Profile" Icon="person">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:ProfilePage}" />
         </Tab>
     </TabBar>
 
